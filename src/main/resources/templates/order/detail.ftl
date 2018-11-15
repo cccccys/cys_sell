@@ -61,10 +61,10 @@
         <div class="col-md-12 column">
             <#if orderDTO.getOrderStatusEnum().message == "新订单">
 
-            <a href="/sell/seller/order/finish?orderId=${orderDTO.orderId}" type="button" class="btn btn-default btn-primary">完结订单</a>
-            <a href="/sell/seller/order/cancel?orderId=${orderDTO.orderId}" type="button" class="btn btn-default btn-danger">取消订单</a>
+            <a href="/sell/order/finish?orderId=${orderDTO.orderId}" type="button" class="btn btn-default btn-primary">完结订单</a>
+            <a href="/sell/order/cancel?orderId=${orderDTO.orderId}" type="button" class="btn btn-default btn-danger">取消订单</a>
             </#if>
-            <a href="/sell/seller/order/list" type="button" class="btn btn-default btn-warning">返回列表</a>
+            <a href="/sell/order/list" type="button" class="btn btn-default btn-warning">返回列表</a>
         </div>
     </div>
 </div>

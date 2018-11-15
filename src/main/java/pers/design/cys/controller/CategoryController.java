@@ -22,8 +22,8 @@ import java.util.Map;
  * 类目Controller
  */
 @Controller
-@RequestMapping("/seller/category")
-public class SellerCategoryController {
+@RequestMapping("/category")
+public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
@@ -73,7 +73,7 @@ public class SellerCategoryController {
 
         if (bindingResult.hasErrors()) {
             map.put("msg", bindingResult.getFieldError().getDefaultMessage());
-            map.put("url", "/sell/seller/category/index");
+            map.put("url", "/sell/category/index");
             return new ModelAndView("common/error", map);
         }
 
@@ -86,11 +86,11 @@ public class SellerCategoryController {
             categoryService.save(productCategory);
         } catch (SellException e) {
             map.put("msg", e.getMessage());
-            map.put("url", "/sell/seller/category/index");
+            map.put("url", "/sell/category/index");
             return new ModelAndView("common/error", map);
         }
 
-        map.put("url", "/sell/seller/category/list");
+        map.put("url", "/sell/category/list");
         return new ModelAndView("common/success", map);
 
     }

@@ -40,10 +40,10 @@
                         <td>${orderDTO.getOrderStatusEnum().message}</td>
                         <td>${orderDTO.getPayStatusEnum().message}</td>
                         <td>${orderDTO.createTime}</td>
-                        <td width="70"><a href="/sell/seller/order/detail?orderId=${orderDTO.orderId}">详情</a></td>
+                        <td width="70"><a href="/sell/order/detail?orderId=${orderDTO.orderId}">详情</a></td>
                         <td width="70">
                             <#if orderDTO.getOrderStatusEnum().message == "新订单">
-                                <a href="/sell/seller/order/cancel?orderId=${orderDTO.orderId}">取消</a>
+                                <a href="/sell/order/cancel?orderId=${orderDTO.orderId}">取消</a>
                             </#if>
                         </td>
                     </tr>
@@ -58,21 +58,21 @@
                     <#if currentPage lte 1>
                         <li class="disabled"><a href="#">上一页</a></li>
                     <#else>
-                        <li><a href="/sell/seller/order/list?page=${currentPage - 1}&size=${size}">上一页</a></li>
+                        <li><a href="/sell/order/list?page=${currentPage - 1}&size=${size}">上一页</a></li>
                     </#if>
                     <#--0..<x 从0到小于x的值的循环-->
                     <#list 1..orderDTOPage.getTotalPages() as index>
                         <#if currentPage == index>
                             <li class="disabled"><a href="#">${index}</a></li>
                         <#else>
-                            <li><a href="/sell/seller/order/list?page=${index}&size=${size}">${index}</a></li>
+                            <li><a href="/sell/order/list?page=${index}&size=${size}">${index}</a></li>
                         </#if>
                     </#list>
 
                     <#if currentPage gte orderDTOPage.getTotalPages()>
                         <li class="disabled"><a href="#">下一页</a></li>
                     <#else>
-                        <li><a href="/sell/seller/order/list?page=${currentPage + 1}&size=${size}">下一页</a></li>
+                        <li><a href="/sell/order/list?page=${currentPage + 1}&size=${size}">下一页</a></li>
                     </#if>
                     </ul>
                 </div>

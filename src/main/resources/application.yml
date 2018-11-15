@@ -4,10 +4,6 @@ spring:
     username: root
     password: 123456
     url: jdbc:mysql://127.0.0.1/dbcys?characterEncoding=utf-8&useSSL=false
-#    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-#    url: jdbc:sqlserver://127.0.0.1:1433;DatabaseName=dbcys
-#    username: sa
-#    password: 123456
 
   jpa:
     show-sql: true

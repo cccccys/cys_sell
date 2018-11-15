@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import pers.design.cys.dataobject.SellerInfo;
+import pers.design.cys.dataobject.UserInfo;
 import pers.design.cys.enums.ResultEnum;
 import pers.design.cys.form.LoginForm;
-import pers.design.cys.service.SellerService;
+import pers.design.cys.service.UserService;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -22,15 +22,15 @@ import java.util.Map;
 @Controller
 @RequestMapping("/")
 @Slf4j
-public class SellerController {
+public class UserController {
 
     @Autowired
-    private SellerService sellerService;
+    private UserService userService;
 
     @GetMapping("/index")
     public ModelAndView index(){
 
-        return new ModelAndView("seller/login");
+        return new ModelAndView("user/login");
     }
 
     @PostMapping("/login")
@@ -44,15 +44,15 @@ public class SellerController {
             return new ModelAndView("common/error", map);
         }
 
-        SellerInfo sellerInfo = sellerService.findByUsername(form.getUsername());
-        if(!sellerInfo.getPassword().equals(form.getPassword())){
+        UserInfo userInfo = userService.findByUsername(form.getUsername());
+        if(!userInfo.getPassword().equals(form.getPassword())){
             map.put("msg", ResultEnum.LOGIN_FAIL.getMessage());
             map.put("url", "/sell/index");
             return new ModelAndView("common/error", map);
         }
 
         map.put("msg", ResultEnum.LOGIN_SUCCESS.getMessage());
-        map.put("url", "/sell/seller/order/list");
+        map.put("url", "/sell/order/list");
         return new ModelAndView("common/success", map);
     }
 

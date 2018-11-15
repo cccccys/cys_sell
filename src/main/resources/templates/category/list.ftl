@@ -33,7 +33,7 @@
                         <td>${category.categoryType}</td>
                         <td>${category.createTime}</td>
                         <td>${category.updateTime}</td>
-                        <td width="70"><a href="/sell/seller/category/index?categoryId=${category.categoryId}">修改</a></td>
+                        <td width="70"><a href="/sell/category/index?categoryId=${category.categoryId}">修改</a></td>
                     </tr>
                     </#list>
                         </tbody>
