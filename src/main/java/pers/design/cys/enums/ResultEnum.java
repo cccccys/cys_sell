@@ -21,7 +21,11 @@ public enum ResultEnum {
     PRODUCT_STATUS_ERROR(24, "商品状态不正确"),
     LOGIN_FAIL(25, "登录失败，登录信息不正确"),
     LOGOUT_SUCCESS(26, "登出成功"),
-    LOGIN_SUCCESS(27, "登陆成功")
+    LOGIN_SUCCESS(27, "登陆成功"),
+    REG_SUCCESS(28, "注册成功"),
+    REG_FAILED(29, "注册成功"),
+    PASSWORD_INCONSISTENT(30, "两次密码输入不一致"),
+    USER_NOT_EXIST(31, "用户不存在"),
     ;
 
     private Integer code;

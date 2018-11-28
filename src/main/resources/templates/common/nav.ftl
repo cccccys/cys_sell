@@ -2,7 +2,7 @@
     <ul class="nav sidebar-nav">
         <li class="sidebar-brand">
             <a href="#">
-                宠物商品销售系统
+                四喜宠物之家
             </a>
         </li>
         <li>
