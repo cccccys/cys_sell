@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import pers.design.cys.dataobject.CartInfo;
+import pers.design.cys.dataobject.ProductInfo;
+import pers.design.cys.enums.ResultEnum;
 import pers.design.cys.form.CartForm;
 import pers.design.cys.service.CartService;
 import pers.design.cys.service.OrderService;
+import pers.design.cys.service.ProductService;
 import pers.design.cys.utils.CookieUtil;
 import pers.design.cys.utils.KeyUtil;
 
@@ -31,6 +34,9 @@ public class CartController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private ProductService productService;
 
     @GetMapping("/list")
     public ModelAndView list(HttpServletRequest request,
@@ -54,6 +60,11 @@ public class CartController {
         cartInfo.setCartId(KeyUtil.genUniqueKey());
         cartInfo.setUsername(data.get("username"));
         cartInfo.setProductId(data.get("productId"));
+        ProductInfo productInfo = productService.findOne(data.get("productId"));
+        if (productInfo != null) {
+            map.put("msg", ResultEnum.PRODUCT_NOT_EXIST.getMessage());
+            map.put("url", "/sell/product/list");
+        }
         cartInfo.setProductQuantity(Integer.valueOf(data.get("productQuantity")));
 
         try {
