@@ -2,6 +2,7 @@ package pers.design.cys.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +28,11 @@ import java.util.Map;
 @Controller
 @RequestMapping("/")
 @Slf4j
+@Configuration
 public class UserController {
+
+    @Autowired
+    private freemarker.template.Configuration configuration;
 
     @Autowired
     private UserService userService;
@@ -42,7 +47,7 @@ public class UserController {
     public ModelAndView login(@Valid LoginForm form,
                               BindingResult bindingResult,
                               HttpServletResponse response,
-                              Map<String, Object> map) {
+                              Map<String, Object> map) throws Exception{
 
         if (bindingResult.hasErrors()) {
             map.put("msg", bindingResult.getFieldError().getDefaultMessage());
@@ -67,6 +72,9 @@ public class UserController {
         //set Cookie
         CookieUtil.set(response, "username", userInfo.getUsername(), 7200);
         CookieUtil.set(response, "type", String.valueOf(userInfo.getUserType()), 7200);
+
+        freemarker.template.Configuration cfg = new freemarker.template.Configuration(freemarker.template.Configuration.VERSION_2_3_27);
+        cfg.setSharedVariable("type", userInfo.getUserType());
 
         map.put("msg", ResultEnum.LOGIN_SUCCESS.getMessage());
         map.put("url", "/sell/order/list");
