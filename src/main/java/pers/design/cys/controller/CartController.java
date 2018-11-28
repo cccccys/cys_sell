@@ -3,9 +3,13 @@ package pers.design.cys.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import pers.design.cys.dataobject.CartInfo;
+import pers.design.cys.form.CartForm;
 import pers.design.cys.service.CartService;
 import pers.design.cys.service.OrderService;
 import pers.design.cys.utils.CookieUtil;
@@ -33,7 +37,7 @@ public class CartController {
                              Map<String, Object> map) {
 
         // 从Cookie中获取username
-        String username =  CookieUtil.get(request, "username").getValue();
+        String username = CookieUtil.get(request, "username").getValue();
 
         if (username != null) {
             List<CartInfo> cartInfoList = cartService.findByUsername(username);
@@ -63,6 +67,23 @@ public class CartController {
         map.put("url", "/sell/product/list");
         return new ModelAndView("common/success", map);
 
+    }
+
+    @PostMapping("/delete")
+    public ModelAndView delete(CartForm form, Map<String, Object> map) {
+
+        CartInfo cartInfo = cartService.findOne(form.getCartId());
+
+        try {
+            cartService.delete(cartInfo);
+        } catch (Exception e) {
+            map.put("msg", e.getMessage());
+            map.put("url", "/sell/product/list");
+            return new ModelAndView("common/error", map);
+        }
+
+        map.put("url", "/sell/cart/list");
+        return new ModelAndView("common/success", map);
     }
 
 }

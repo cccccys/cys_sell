@@ -29,7 +29,7 @@
                         <td>${cart.productId}</td>
                         <td>${cart.productQuantity}</td>
                         <td>${cart.createTime}</td>
-                        <td width="70"><a href="#">删除</a></td>
+                        <td width="70"><a href="javascript:deleteCart(${cart.cartId})">删除</a></td>
                     </tr>
                     </#list>
                         </tbody>
@@ -40,6 +40,24 @@
     </div>
 
 </div>
+
+<script>
+
+    var deleteCart = function (cartId) {
+        var postForm = document.createElement('form');
+        postForm.method = 'post';
+        postForm.action = '/sell/cart/delete';
+
+        var formInput = document.createElement('input');
+        formInput.setAttribute('name', 'cartId');
+        formInput.setAttribute('value', cartId);
+
+        postForm.appendChild(formInput);
+        document.body.appendChild(postForm);
+        postForm.submit();
+        document.body.removeChild(postForm);
+    }
+</script>
 </body>
 </html>
 

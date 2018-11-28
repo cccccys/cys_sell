@@ -26,6 +26,7 @@ public enum ResultEnum {
     REG_FAILED(29, "注册成功"),
     PASSWORD_INCONSISTENT(30, "两次密码输入不一致"),
     USER_NOT_EXIST(31, "用户不存在"),
+    CART_NOT_EXIST(32, "订单不存在"),
     ;
 
     private Integer code;

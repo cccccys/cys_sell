@@ -11,4 +11,8 @@ public interface CartService {
 
     // 查询指定用户的购物车
     List<CartInfo> findByUsername(String username);
+
+    void delete(CartInfo cartInfo);
+
+    CartInfo findOne(String cartId);
 }
