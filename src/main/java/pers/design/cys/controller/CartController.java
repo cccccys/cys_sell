@@ -48,9 +48,12 @@ public class CartController {
         if (username != null) {
             List<CartInfo> cartInfoList = cartService.findByUsername(username);
             map.put("cartInfoList", cartInfoList);
+            return new ModelAndView("cart/list", map);
         }
 
-        return new ModelAndView("cart/list", map);
+        map.put("msg", "请先登录");
+        map.put("url", "/sell/index");
+        return new ModelAndView("common/error", map);
     }
 
     @PostMapping("/add")
