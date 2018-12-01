@@ -1,6 +1,11 @@
 <html>
 <head>
     <#include "../common/header.ftl">
+    <style>
+        .sum {
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
 
@@ -17,23 +22,33 @@
                         <thead>
                         <tr>
                             <th>商品号</th>
+                            <th>商品单价</th>
                             <th>数量</th>
+                            <th>小计</th>
                             <th>创建时间</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
 
+                    <#assign sum = 0>
                     <#list cartInfoList as cart>
                     <tr>
                         <td>${cart.productId}</td>
+                        <td>${cart.productPrice}</td>
                         <td>${cart.productQuantity}</td>
+                        <#assign productSum = cart.productPrice * cart.productQuantity>
+                        <td>${productSum}</td>
                         <td>${cart.createTime}</td>
                         <td width="70"><a href="javascript:deleteCart(${cart.cartId})">删除</a></td>
+                        <#assign sum = sum + productSum>
                     </tr>
                     </#list>
                         </tbody>
                     </table>
+                    <div class="sum">
+                        总计: ${sum}
+                    </div>
                 </div>
             </div>
         </div>

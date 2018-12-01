@@ -27,7 +27,7 @@
                             <th>创建时间</th>
                             <th>修改时间</th>
                         <#--操作占了两列-->
-                            <th colspan="2" >操作</th>
+                            <th colspan="2">操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -53,17 +53,15 @@
                             </#if>
                         </td>
                         <td width="70" class="buyer">
-                            <div class="input-group spinner">
-                                <input type="text" class="form-control" value="1">
-                                <div class="input-group-btn-vertical">
-                                    <button class="btn btn-default" type="button"><i class="fas fa-caret-up"></i>
-                                    </button>
-                                    <button class="btn btn-default" type="button"><i class="fas fa-caret-down"></i>
-                                    </button>
+                            <form role="form" method="post" action="/sell/cart/add">
+                                <div>
+                                    <label>数量</label>
+                                    <input type="number" name="productQuantity" class="form-control" value="1">
                                 </div>
-                            </div>
+                                <input hidden type="text" name="productId" value="${(productInfo.productId)}">
+                                <button type="submit" class="btn btn-primary">添加到购物车</button>
+                            </form>
                         </td>
-                        <td width="70" class="buyer"><i class="fas fa-cart-plus"></i></td>
                     </tr>
                     </#list>
                         </tbody>
@@ -105,28 +103,18 @@
     var type = document.cookie.replace(/(?:(?:^|.*;\s*)type\s*=\s*([^;]*).*$)|^.*$/, "$1");
 
     if (type === '1') {
-        // document.getElementById('seller').style.display = 'none';
         var seller = document.getElementsByClassName('seller');
         for (var i = 0; i < seller.length; i++) {
             seller[i].style.display = 'none';
         }
     }
     if (type === '0') {
-        // document.getElementById('buyer').style.display = 'none';
         var buyer = document.getElementsByClassName('buyer');
         for (var i = 0; i < buyer.length; i++) {
             buyer[i].style.display = 'none';
         }
     }
 
-    (function ($) {
-        $('.spinner .btn:first-of-type').on('click', function() {
-            $('.spinner input').val( parseInt($('.spinner input').val(), 10) + 1);
-        });
-        $('.spinner .btn:last-of-type').on('click', function() {
-            $('.spinner input').val( parseInt($('.spinner input').val(), 10) - 1);
-        });
-    })(jQuery);
 </script>
 </body>
 </html>

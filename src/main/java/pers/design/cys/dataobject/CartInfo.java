@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -19,6 +20,8 @@ public class CartInfo {
     private String username;
 
     private String productId;
+
+    private BigDecimal productPrice;
 
     private Integer productQuantity;
 

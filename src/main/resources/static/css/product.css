@@ -33,3 +33,7 @@
     top: 0;
     left: 4px;
 }
+
+form button {
+    margin-top: 10px;
+}
