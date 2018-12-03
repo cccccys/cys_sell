@@ -11,5 +11,5 @@ import pers.design.cys.dataobject.OrderMaster;
 public interface OrderMasterRepository extends JpaRepository<OrderMaster, String> {
 
     //按照买家id来查询，防止订单量过大，用分页方式
-    Page<OrderMaster> findByBuyerOpenid(String buyerOpenid, Pageable pageable);
+    Page<OrderMaster> findByUsername(String username, Pageable pageable);
 }

@@ -31,8 +31,8 @@ public class OrderDTO {
     //买家地址
     private String buyerAddress;
 
-    //买家微信openid
-    private String buyerOpenid;
+    //买家username
+    private String username;
 
     //订单总金额
     private BigDecimal orderAmount;

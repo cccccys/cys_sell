@@ -116,9 +116,9 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Page<OrderDTO> findList(String buyerOpenid, Pageable pageable) {
+    public Page<OrderDTO> findListByUsername(String username, Pageable pageable) {
 
-        Page<OrderMaster> orderMasterPage = orderMasterRepository.findByBuyerOpenid(buyerOpenid, pageable);
+        Page<OrderMaster> orderMasterPage = orderMasterRepository.findByUsername(username, pageable);
 
         List<OrderDTO> orderDTOList = OrderMaster2OrderDTOConverter.convert(orderMasterPage.getContent());
 

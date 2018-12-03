@@ -37,7 +37,7 @@ public class OrderServiceImplTest {
         orderDTO.setBuyerName("测试一下时间格式");
         orderDTO.setBuyerAddress("寝室二楼");
         orderDTO.setBuyerPhone("12345678945");
-        orderDTO.setBuyerOpenid(BUYER_OPENID);
+        orderDTO.setUsername(BUYER_OPENID);
 
         //购物车
         List<OrderDetail> orderDetailList = new ArrayList<>();
@@ -72,7 +72,7 @@ public class OrderServiceImplTest {
     public void findList() {
 
         PageRequest request = new PageRequest(0, 2);
-        Page<OrderDTO> orderDTOPage = orderService.findList(BUYER_OPENID, request);
+        Page<OrderDTO> orderDTOPage = orderService.findListByUsername(BUYER_OPENID, request);
         Assert.assertNotEquals(0, orderDTOPage.getTotalElements());
     }
 

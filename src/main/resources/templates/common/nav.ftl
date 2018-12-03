@@ -1,6 +1,6 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
     <ul class="nav sidebar-nav">
-        <li class="sidebar-brand">
+        <li class="sidebar-brand title">
             <a href="#">
                 四喜宠物之家
             </a>
@@ -41,13 +41,13 @@
 
         <div id="buyer">
             <li>
-                <a href="/sell/order/list"><i class="fas fa-clipboard-list"></i> 订单</a>
-            </li>
-            <li>
-                <a href="/sell/product/list"><i class="fas fa-cube"></i> 商品</a>
+                <a href="/sell/product/list"><i class="fas fa-cube"></i> 查看商品</a>
             </li>
             <li>
                 <a href="/sell/cart/list"><i class="fas fa-shopping-cart"></i> 购物车</a>
+            </li>
+            <li>
+                <a href="/sell/order/buyer_list"><i class="fas fa-clipboard-list"></i> 我的订单</a>
             </li>
         </div>
 

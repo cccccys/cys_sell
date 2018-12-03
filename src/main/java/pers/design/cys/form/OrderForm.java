@@ -31,8 +31,8 @@ public class OrderForm {
     /**
      * 买家openid
      */
-    @NotEmpty(message = "openid必填")
-    private String openid;
+    @NotEmpty(message = "还没登录")
+    private String username;
 
     /**
      *商品列表

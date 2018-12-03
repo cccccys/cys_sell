@@ -40,12 +40,13 @@
                         <td>${orderDTO.getOrderStatusEnum().message}</td>
                         <td>${orderDTO.getPayStatusEnum().message}</td>
                         <td>${orderDTO.createTime}</td>
-                        <td width="70"><a href="/sell/order/detail?orderId=${orderDTO.orderId}">详情</a></td>
-                        <td width="70">
+                        <td width="70" class="seller"><a href="/sell/order/detail?orderId=${orderDTO.orderId}">详情</a></td>
+                        <td width="70" class="seller">
                             <#if orderDTO.getOrderStatusEnum().message == "新订单">
                                 <a href="/sell/order/cancel?orderId=${orderDTO.orderId}">取消</a>
                             </#if>
                         </td>
+                        <td class="buyer"><a href="/sell/order/detail?orderId=${orderDTO.orderId}">详情</a></td>
                     </tr>
                     </#list>
                         </tbody>
@@ -83,7 +84,23 @@
 </div>
 
 
+<script>
+    var type = document.cookie.replace(/(?:(?:^|.*;\s*)type\s*=\s*([^;]*).*$)|^.*$/, "$1");
 
+    if (type === '1') {
+        var seller = document.getElementsByClassName('seller');
+        for (var i = 0; i < seller.length; i++) {
+            seller[i].style.display = 'none';
+        }
+    }
+    if (type === '0') {
+        var buyer = document.getElementsByClassName('buyer');
+        for (var i = 0; i < buyer.length; i++) {
+            buyer[i].style.display = 'none';
+        }
+    }
+
+</script>
 </body>
 </html>
 

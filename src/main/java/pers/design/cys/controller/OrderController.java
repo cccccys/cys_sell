@@ -5,19 +5,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import pers.design.cys.Exception.SellException;
+import pers.design.cys.converter.OrderForm2OrderDTOConverter;
 import pers.design.cys.dto.OrderDTO;
 import pers.design.cys.enums.ResultEnum;
+import pers.design.cys.form.OrderForm;
 import pers.design.cys.service.OrderService;
-import pers.design.cys.Exception.SellException;
+import pers.design.cys.utils.CookieUtil;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.Map;
 
 /**
- * 卖家订单Service
+ * 订单Service
  */
 @Controller
 @RequestMapping("/order")
@@ -28,7 +36,7 @@ public class OrderController {
     private OrderService orderService;
 
     /**
-     * 查询订单列表
+     * 查询所有订单
      *
      * @param page 页数，从1开始
      * @param size 每页数据数
@@ -41,6 +49,34 @@ public class OrderController {
 
         PageRequest request = new PageRequest(page - 1, size);
         Page<OrderDTO> orderDTOPage = orderService.findList(request);
+        map.put("orderDTOPage", orderDTOPage);
+        map.put("currentPage", page);
+        map.put("size", size);
+        return new ModelAndView("order/list", map);
+    }
+
+    /**
+     * 查看用户订单
+     *
+     * @param request
+     * @param page
+     * @param size
+     * @param map
+     * @return
+     */
+    @GetMapping("buyer_list")
+    public ModelAndView buyerList(HttpServletRequest request,
+                                  @RequestParam(value = "page", defaultValue = "1") Integer page,
+                                  @RequestParam(value = "size", defaultValue = "3") Integer size,
+                                  Map<String, Object> map) {
+        PageRequest pageRequest = new PageRequest(page - 1, size);
+        String username = CookieUtil.get(request, "username").getValue();
+        if (username == null) {
+            map.put("msg", "请先登录");
+            map.put("url", "/sell/index");
+            return new ModelAndView("common/error", map);
+        }
+        Page<OrderDTO> orderDTOPage = orderService.findListByUsername(username, pageRequest);
         map.put("orderDTOPage", orderDTOPage);
         map.put("currentPage", page);
         map.put("size", size);
@@ -97,6 +133,13 @@ public class OrderController {
         return new ModelAndView("order/detail", map);
     }
 
+    /**
+     * 完结订单
+     *
+     * @param orderId
+     * @param map
+     * @return
+     */
     @GetMapping("/finish")
     public ModelAndView finish(@RequestParam("orderId") String orderId,
                                Map<String, Object> map) {
@@ -114,6 +157,30 @@ public class OrderController {
         map.put("msg", ResultEnum.ORDER_FINISH_SUCCESS.getMessage());
         map.put("url", "/sell/order/list");
         return new ModelAndView("common/success");
+    }
+
+    @PostMapping("/add")
+    public ModelAndView add(HttpServletRequest request,
+                            @Valid OrderForm orderForm,
+                            BindingResult bindingResult,
+                            Map<String, Object> map) {
+
+        if (bindingResult.hasErrors()) {
+            map.put("msg", ResultEnum.PARAM_ERROR.getMessage());
+            map.put("url", "/sell/cart/list");
+            return new ModelAndView("common/error", map);
+        }
+        OrderDTO orderDTO = OrderForm2OrderDTOConverter.convert(orderForm);
+        if (CollectionUtils.isEmpty(orderDTO.getOrderDetailList())) {
+            map.put("msg", ResultEnum.CART_EMPTY.getMessage());
+            map.put("url", "/sell/cart/list");
+            return new ModelAndView("common/error", map);
+        }
+
+        OrderDTO createResult = orderService.create(orderDTO);
+
+        map.put("url", "/sell/order/buyer_list");
+        return new ModelAndView("common/success", map);
     }
 }
 

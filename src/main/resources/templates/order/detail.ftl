@@ -61,15 +61,33 @@
         <div class="col-md-12 column">
             <#if orderDTO.getOrderStatusEnum().message == "新订单">
 
-            <a href="/sell/order/finish?orderId=${orderDTO.orderId}" type="button" class="btn btn-default btn-primary">完结订单</a>
-            <a href="/sell/order/cancel?orderId=${orderDTO.orderId}" type="button" class="btn btn-default btn-danger">取消订单</a>
+            <a href="/sell/order/finish?orderId=${orderDTO.orderId}" type="button" class="btn btn-default btn-primary seller">完结订单</a>
+            <a href="/sell/order/cancel?orderId=${orderDTO.orderId}" type="button" class="btn btn-default btn-danger seller">取消订单</a>
             </#if>
-            <a href="/sell/order/list" type="button" class="btn btn-default btn-warning">返回列表</a>
+            <a href="/sell/order/list" type="button" class="btn btn-default btn-warning seller">返回列表</a>
+            <a href="/sell/order/buyer_list" type="button" class="btn btn-default btn-warning buyer">返回列表</a>
         </div>
     </div>
 </div>
     </div>
 </div>
 
+<script>
+    var type = document.cookie.replace(/(?:(?:^|.*;\s*)type\s*=\s*([^;]*).*$)|^.*$/, "$1");
+
+    if (type === '1') {
+        var seller = document.getElementsByClassName('seller');
+        for (var i = 0; i < seller.length; i++) {
+            seller[i].style.display = 'none';
+        }
+    }
+    if (type === '0') {
+        var buyer = document.getElementsByClassName('buyer');
+        for (var i = 0; i < buyer.length; i++) {
+            buyer[i].style.display = 'none';
+        }
+    }
+
+</script>
 </body>
 </html>

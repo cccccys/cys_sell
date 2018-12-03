@@ -77,7 +77,7 @@ public class UserController {
         cfg.setSharedVariable("type", userInfo.getUserType());
 
         map.put("msg", ResultEnum.LOGIN_SUCCESS.getMessage());
-        map.put("url", "/sell/order/list");
+        map.put("url", "/sell/product/list");
         return new ModelAndView("common/success", map);
     }
 

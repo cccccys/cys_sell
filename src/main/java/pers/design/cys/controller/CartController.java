@@ -13,7 +13,6 @@ import pers.design.cys.enums.ResultEnum;
 import pers.design.cys.form.AddCartForm;
 import pers.design.cys.form.CartForm;
 import pers.design.cys.service.CartService;
-import pers.design.cys.service.OrderService;
 import pers.design.cys.service.ProductService;
 import pers.design.cys.utils.CookieUtil;
 import pers.design.cys.utils.KeyUtil;
@@ -31,9 +30,6 @@ import java.util.Map;
 public class CartController {
     @Autowired
     private CartService cartService;
-
-    @Autowired
-    private OrderService orderService;
 
     @Autowired
     private ProductService productService;
