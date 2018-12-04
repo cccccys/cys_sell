@@ -14,14 +14,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import pers.design.cys.Exception.SellException;
 import pers.design.cys.converter.OrderForm2OrderDTOConverter;
+import pers.design.cys.dataobject.CartInfo;
 import pers.design.cys.dto.OrderDTO;
 import pers.design.cys.enums.ResultEnum;
 import pers.design.cys.form.OrderForm;
+import pers.design.cys.service.CartService;
 import pers.design.cys.service.OrderService;
 import pers.design.cys.utils.CookieUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,6 +37,9 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private CartService cartService;
 
     /**
      * 查询所有订单
@@ -178,8 +184,16 @@ public class OrderController {
         }
 
         OrderDTO createResult = orderService.create(orderDTO);
+        if (createResult != null) {
+            String username = CookieUtil.get(request, "username").getValue();
+            List<CartInfo> cartInfoList = cartService.findByUsername(username);
+            cartInfoList.forEach(cart -> cartService.delete(cart));
 
-        map.put("url", "/sell/order/buyer_list");
+        }
+
+        String url = "/sell/order/detail?orderId=" + createResult.getOrderId();
+
+        map.put("url", url);
         return new ModelAndView("common/success", map);
     }
 }
