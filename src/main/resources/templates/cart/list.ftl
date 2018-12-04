@@ -67,10 +67,9 @@
                                 <input id="address" name="buyerAddress" type="text" class="form-control"
                                        value=""/>
                             </div>
-                            <button class="btn btn-primary"><a href="javascript:addOrder()">ok</a>
-                            </button>
-                            <#--<a href="javascript:addOrder(buyerName.value, buyerPhone.value, buyerAddress.value)"></a>-->
                         </form>
+                        <button class="btn btn-primary" onclick="addOrder()">确认购买
+                        </button>
 
                     </div>
                 </div>

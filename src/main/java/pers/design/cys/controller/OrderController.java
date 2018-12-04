@@ -50,7 +50,7 @@ public class OrderController {
      */
     @GetMapping("/list")
     public ModelAndView list(@RequestParam(value = "page", defaultValue = "1") Integer page,
-                             @RequestParam(value = "size", defaultValue = "3") Integer size,
+                             @RequestParam(value = "size", defaultValue = "10") Integer size,
                              Map<String, Object> map) {
 
         PageRequest request = new PageRequest(page - 1, size);
@@ -73,7 +73,7 @@ public class OrderController {
     @GetMapping("buyer_list")
     public ModelAndView buyerList(HttpServletRequest request,
                                   @RequestParam(value = "page", defaultValue = "1") Integer page,
-                                  @RequestParam(value = "size", defaultValue = "3") Integer size,
+                                  @RequestParam(value = "size", defaultValue = "10") Integer size,
                                   Map<String, Object> map) {
         PageRequest pageRequest = new PageRequest(page - 1, size);
         String username = CookieUtil.get(request, "username").getValue();
