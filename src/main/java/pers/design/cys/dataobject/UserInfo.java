@@ -20,7 +20,7 @@ public class UserInfo {
 
     private String password;
 
-    private Integer userType = 0;
+    private Integer userType = 1;
 
     public UserInfo() {
     }

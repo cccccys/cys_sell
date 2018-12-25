@@ -98,9 +98,8 @@ public class CartController {
     @PostMapping("/delete")
     public ModelAndView delete(CartForm form, Map<String, Object> map) {
 
-        CartInfo cartInfo = cartService.findOne(form.getCartId());
-
         try {
+            CartInfo cartInfo = cartService.findOne(form.getCartId());
             cartService.delete(cartInfo);
         } catch (Exception e) {
             map.put("msg", e.getMessage());

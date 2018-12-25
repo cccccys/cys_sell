@@ -114,7 +114,7 @@ public class UserController {
             return new ModelAndView("common/error", map);
         }
 
-        UserInfo userInfo = new UserInfo(form.getUsername(), form.getPassword(), 0);
+        UserInfo userInfo = new UserInfo(form.getUsername(), form.getPassword(), 1);
         try {
             userService.save(userInfo);
         } catch (Exception e) {

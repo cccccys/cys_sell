@@ -40,7 +40,7 @@
                         <#assign productSum = cart.productPrice * cart.productQuantity>
                         <td>${productSum}</td>
                         <td>${cart.createTime}</td>
-                        <td width="70"><a href="javascript:deleteCart(${cart.cartId})">删除</a></td>
+                        <td width="70"><a href="javascript:void(0)" onclick="deleteCart(${cart.cartId})">删除</a></td>
                         <#assign sum = sum + productSum>
                     </tr>
                     </#list>
@@ -94,7 +94,7 @@
         document.body.appendChild(postForm);
         postForm.submit();
         document.body.removeChild(postForm);
-    }
+    };
 
     var addOrder = function () {
         var items = [];
