@@ -23,12 +23,6 @@
                         <label for="inputPasswordAck">确认密码</label>
                         <input name="passwordAck" class="form-control" id="inputPasswordAck" type="password"/>
                     </div>
-                    <div class="form-group">
-                        <label for="seller">我是卖家</label>
-                        <input name="userType" id="seller" type="radio" value="0"/>
-                        <label for="buyer">我是买家</label>
-                        <input name="userType" id="buyer" type="radio" value="1"/>
-                    </div>
                     <button type="submit" class="btn btn-primary">注册</button>
                 </form>
                 <button class="btn btn-warning"><a href="/sell/index">返回</a></button>
