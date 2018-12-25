@@ -19,6 +19,4 @@ public class RegForm {
     @NotEmpty(message = "请确认您的密码")
     private String passwordAck;
 
-    @NotEmpty(message = "请选择用户类型")
-    private String userType;
 }

@@ -47,7 +47,7 @@ public class UserController {
     public ModelAndView login(@Valid LoginForm form,
                               BindingResult bindingResult,
                               HttpServletResponse response,
-                              Map<String, Object> map) throws Exception{
+                              Map<String, Object> map) throws Exception {
 
         if (bindingResult.hasErrors()) {
             map.put("msg", bindingResult.getFieldError().getDefaultMessage());
@@ -108,7 +108,13 @@ public class UserController {
             return new ModelAndView("common/error", map);
         }
 
-        UserInfo userInfo = new UserInfo(form.getUsername(), form.getPassword(), Integer.valueOf(form.getUserType()));
+        if (userService.findByUsername(form.getUsername()) != null) {
+            map.put("msg", ResultEnum.USER_EXISTED.getMessage());
+            map.put("url", "/sell/logon");
+            return new ModelAndView("common/error", map);
+        }
+
+        UserInfo userInfo = new UserInfo(form.getUsername(), form.getPassword(), 0);
         try {
             userService.save(userInfo);
         } catch (Exception e) {

@@ -23,11 +23,12 @@ public enum ResultEnum {
     LOGOUT_SUCCESS(26, "登出成功"),
     LOGIN_SUCCESS(27, "登陆成功"),
     REG_SUCCESS(28, "注册成功"),
-    REG_FAILED(29, "注册成功"),
+    REG_FAILED(29, "注册失败"),
     PASSWORD_INCONSISTENT(30, "两次密码输入不一致"),
     USER_NOT_EXIST(31, "用户不存在"),
     CART_NOT_EXIST(32, "订单不存在"),
     ADD_CART_SUCCESS(33, "添加购物车成功"),
+    USER_EXISTED(34, "用户已存在"),
     ;
 
     private Integer code;
